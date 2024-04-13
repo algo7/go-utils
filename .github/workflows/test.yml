@@ -1,0 +1,49 @@
+name: Test
+
+permissions:
+  contents: write
+
+on:
+  # Allow manual trigger
+  workflow_call:
+
+  # Run on push to main branch
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - '.github/workflows/**'
+      - 'README.md'
+
+  # Run on pull request to main branch
+  pull_request:
+    branches:
+      - main
+    paths-ignore:
+      - '.github/workflows/**'
+      - 'README.md'
+jobs:
+  test:
+    name: Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version-file: 'go.mod'
+          cache: true
+          cache-dependency-path: 'go.sum'
+
+      - name: Test
+        run: go test -coverprofile=coverage.out ./...
+        shell: bash
+
+      - name: Upload Test Coverage Report
+        uses: actions/upload-artifact@v4.3.1
+        with:
+          name: coverage
+          path: coverage.html
+          compression-level: 0
