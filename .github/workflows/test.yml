@@ -4,7 +4,10 @@ permissions:
   contents: write
 
 on:
-  # Allow manual trigger
+  # Allow workflow to be manually triggered
+  workflow_dispatch:
+
+  # Allow workflow to be ca
   workflow_call:
 
   # Run on push to main branch
