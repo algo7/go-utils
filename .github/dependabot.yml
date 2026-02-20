@@ -4,14 +4,6 @@ updates:
     directory: / # Location of package manifests
     schedule:
       interval: 'weekly'
-
-  - package-ecosystem: 'github-actions'
-    # Workflow files stored in the
-    # default location of `.github/workflows`
-    directory: '/'
-    schedule:
-      interval: 'weekly'
-    # Group updates base on dependency name pattern
     groups:
       go:
         patterns:
@@ -19,5 +11,10 @@ updates:
           - 'golang.org*'
     assignees:
       - 'algo7'
-    reviewers:
+
+  - package-ecosystem: 'github-actions'
+    directory: '/'
+    schedule:
+      interval: 'weekly'
+    assignees:
       - 'algo7'
