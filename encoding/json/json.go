@@ -23,7 +23,7 @@ import (
 //	  fmt.Println(err)
 //	}
 //	fmt.Println(person.Name)
-func StrictUnMarshalJSON(data []byte, target interface{}) error {
+func StrictUnMarshalJSON(data []byte, target any) error {
 
 	// Create a new JSON decoder and disallow unknown fields
 	decoder := json.NewDecoder(bytes.NewReader(data))
@@ -35,7 +35,7 @@ func StrictUnMarshalJSON(data []byte, target interface{}) error {
 
 	// Check if there was an error during decoding
 	if err != nil {
-		return fmt.Errorf("Invalid JSON: %s", err)
+		return fmt.Errorf("invalid JSON: %w", err)
 	}
 
 	// Check if there is any remaining data in the decoder after decoding

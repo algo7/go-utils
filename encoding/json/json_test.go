@@ -21,7 +21,7 @@ func TestStrictUnMarshalJSON(t *testing.T) {
 	testCases := []struct {
 		name     string
 		data     []byte
-		target   interface{}
+		target   any
 		expected error
 	}{
 		{
@@ -34,7 +34,7 @@ func TestStrictUnMarshalJSON(t *testing.T) {
 			name:     "Unknown Field",
 			data:     []byte(`{"car":"Ford","year":2021,"color":"red"}`),
 			target:   &MockDataCar{},
-			expected: errors.New("Invalid JSON: json: unknown field \"color\""),
+			expected: errors.New("invalid JSON: json: unknown field \"color\""),
 		},
 		{
 			name:     "Unexpected Data",
